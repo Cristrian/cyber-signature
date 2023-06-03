@@ -22,6 +22,7 @@ def generate_keypair() -> tuple[Ed25519PrivateKey, Ed25519PublicKey]:
 
     return private_key, public_key
 
+
 def sign(
     message: bytes, private_key: Ed25519PrivateKey | None = None
 ) -> tuple[bytes, Ed25519PrivateKey]:
@@ -29,7 +30,7 @@ def sign(
 
     Args:
         message: The message to sign.
-        private_key: The private key to use for signing. If not provided, 
+        private_key: The private key to use for signing. If not provided,
             a new key will be generated.
 
     Returns:
@@ -40,6 +41,7 @@ def sign(
         private_key = Ed25519PrivateKey.generate()
 
     return private_key.sign(message), private_key
+
 
 def verify(message: bytes, signature: bytes, public_key: Ed25519PublicKey) -> bool:
     """Verify a signature.
