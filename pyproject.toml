@@ -2,7 +2,10 @@
 name = "cyber-signature"
 version = "0.1.0"
 description = ""
-authors = ["Cristian Triana <crisdevelop4@gmail.com>"]
+authors = [
+    "Cristian Triana <crisdevelop4@gmail.com>",
+    "Juan Bernardo Benavides Rubio <jbbenavidesr@unal.edu.co>"
+]
 readme = "README.md"
 packages = [{include = "cyber_signature"}]
 
