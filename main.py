@@ -1,6 +1,6 @@
 
 
-from src.modules.pdf import add_sign_page_pdf
+from cyber_signature.pdf import add_sign_page_pdf
 
 
 if __name__ == '__main__':

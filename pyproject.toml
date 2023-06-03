@@ -7,7 +7,7 @@ authors = [
     "Juan Bernardo Benavides Rubio <jbbenavidesr@unal.edu.co>"
 ]
 readme = "README.md"
-packages = [{include = "cyber_signature"}]
+packages = [{include = "cyber_signature", from = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
