@@ -6,6 +6,11 @@ from pypdf import PdfMerger
 from reportlab.pdfgen import canvas
 
 
+def clean_path_name(path_str: str):
+    cleaned = path_str.split("/")[-1]
+    return cleaned
+
+
 def add_page_pdf(original_pdf: IO, page_to_add: IO, new_pdf: IO):
     # Añade una página al pdf
     merger = PdfMerger()
@@ -40,7 +45,7 @@ def add_sign_page_pdf(pdf_to_sign: IO, signature_text: str):
     path.mkdir()
     create_signed_page(signature_text)
     page_to_add = open("temp_files/sign_page.pdf", "rb")
-    filename = pdf_to_sign.name
+    filename = clean_path_name(pdf_to_sign.name)
     signed_pdf = open(f"signed_{filename}", "wb")
     add_page_pdf(original_pdf=pdf_to_sign, page_to_add=page_to_add, new_pdf=signed_pdf)
     page_to_add.close()
@@ -48,3 +53,7 @@ def add_sign_page_pdf(pdf_to_sign: IO, signature_text: str):
     # Clean temp files
 
     remove_all(path)
+
+
+def verify_is_pdf(pdf):
+    pass
