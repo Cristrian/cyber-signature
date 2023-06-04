@@ -1,6 +1,6 @@
 from pathlib import Path
 from typing import IO
-from src.cyber_signature.pdf import add_sign_page_pdf
+from cyber_signature.pdf import add_sign_page_pdf
 import typer
 from typing_extensions import Annotated
 app = typer.Typer()
