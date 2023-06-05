@@ -2,9 +2,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import IO
 
-from pypdf import PdfMerger, PdfReader, PdfWriter
+from pypdf import PdfMerger
 from reportlab.pdfgen import canvas
-from cryptography.hazmat.primitives import serialization
 
 from .signature_service import sign, verify
 
@@ -54,12 +53,14 @@ def add_sign_page_pdf(pdf_to_sign: Path, signature_text: str) -> Path:
 
     with signature_page.open("rb") as page_to_add:
         with signed_pdf_path.open("wb") as signed_pdf:
-            add_page_pdf(original_pdf=pdf_to_sign, page_to_add=page_to_add, new_pdf=signed_pdf)
+            add_page_pdf(
+                original_pdf=pdf_to_sign, page_to_add=page_to_add, new_pdf=signed_pdf
+            )
 
     # Clean temp files
     remove_all(tmp)
 
-    return signed_pdf_path 
+    return signed_pdf_path
 
 
 def sign_pdf(pdf_file: Path) -> Path:
@@ -77,11 +78,12 @@ def sign_pdf(pdf_file: Path) -> Path:
 
     with signature_file.open("wb") as sig:
         sig.write(signature)
-    
+
     with public_key_file.open("wb") as pub:
         pub.write(public_key.public_bytes_raw())
-    
+
     return signature_file
+
 
 def verify_pdf(pdf_file: Path) -> bool:
     """Verify the signature of a pdf file."""

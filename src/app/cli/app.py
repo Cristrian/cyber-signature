@@ -1,42 +1,38 @@
 from pathlib import Path
-from typing import IO
 
+import cyber_signature.pdf as pdf_signer
 import typer
 from typing_extensions import Annotated
 
-import cyber_signature.pdf as pdf_signer
-
-
 app = typer.Typer()
+
 
 def sign_pdf(pdf_file: Path):
     extra_page = typer.confirm(
         text="Do you want an extra page inside the pdf with a custom signature and the date?",
-        default=False
+        default=False,
     )
 
     file_to_sign = pdf_file
 
     if extra_page:
         # Firma con página extra
-        signature = typer.prompt("Please specify the name in the signature (e.g. John Doe)")
+        signature = typer.prompt(
+            "Please specify the name in the signature (e.g. John Doe)"
+        )
         file_to_sign = pdf_signer.add_sign_page_pdf(pdf_file, signature)
-    
 
     return file_to_sign
 
-    
+
 @app.command()
 def sign(
-    file_path: Annotated[
-        str, 
-        typer.Argument(help="The path of the file to sign.")
-        ],
+    file_path: Annotated[str, typer.Argument(help="The path of the file to sign.")],
     pdf: Annotated[
-        bool, 
-        typer.Option(help="Specify if you want to sign a pdf file in the metadata.")
-        ] = False
-    ):
+        bool,
+        typer.Option(help="Specify if you want to sign a pdf file in the metadata."),
+    ] = False,
+):
     """
     Signs the file in FILE_PATH
     """
@@ -51,7 +47,7 @@ def sign(
     if not path.is_file():
         print(f"The path '{file_path}' is not a file.")
         raise typer.Exit(1)
-    
+
     file_to_sign = path
 
     if pdf:
@@ -67,11 +63,8 @@ def sign(
 
 @app.command()
 def verify(
-    file_path: Annotated[
-        str, 
-        typer.Argument(help="The path of the file to verify.")
-        ],
-    ):
+    file_path: Annotated[str, typer.Argument(help="The path of the file to verify.")],
+):
     """
     Verifies the file in FILE_PATH
     """
@@ -86,14 +79,11 @@ def verify(
     if not path.is_file():
         print(f"The path '{file_path}' is not a file.")
         raise typer.Exit(1)
-    
 
     if pdf_signer.verify_pdf(path):
         print("La firma es válida")
     else:
         print("La firma no es válida")
-    
-    
 
 
 @app.command()
