@@ -43,7 +43,7 @@ def sign(
     return private_key.sign(message), private_key
 
 
-def verify(message: bytes, signature: bytes, public_key: Ed25519PublicKey) -> bool:
+def verify(message: bytes, signature: bytes, public_key: bytes) -> bool:
     """Verify a signature.
 
     Args:
@@ -54,6 +54,7 @@ def verify(message: bytes, signature: bytes, public_key: Ed25519PublicKey) -> bo
     Returns:
         True if the signature is valid, False otherwise.
     """
+    public_key = Ed25519PublicKey.from_public_bytes(public_key)
     try:
         public_key.verify(signature, message)
         return True
