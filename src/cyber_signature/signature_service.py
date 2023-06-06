@@ -3,6 +3,7 @@
 This service is a wrapper around the cryptography library. It provides
 a simple interface for signing and verifying signatures.
 """
+from typing import Optional
 from cryptography.exceptions import InvalidSignature
 from cryptography.hazmat.primitives.asymmetric.ed25519 import (
     Ed25519PrivateKey,
@@ -24,7 +25,7 @@ def generate_keypair() -> tuple[Ed25519PrivateKey, Ed25519PublicKey]:
 
 
 def sign(
-    message: bytes, private_key: Ed25519PrivateKey | None = None
+    message: bytes, private_key: Optional[Ed25519PrivateKey]
 ) -> tuple[bytes, Ed25519PrivateKey]:
     """Sign a message.
 
