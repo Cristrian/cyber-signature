@@ -1,13 +1,13 @@
 [tool.poetry]
 name = "cyber-signature"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = [
     "Cristian Triana <crisdevelop4@gmail.com>",
     "Juan Bernardo Benavides Rubio <jbbenavidesr@unal.edu.co>"
 ]
 readme = "README.md"
-packages = [{include = "cyber_signature", from = "src"}]
+
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -16,6 +16,8 @@ reportlab = "^4.0.4"
 cryptography = "^41.0.1"
 typer = {extras = ["all"], version = "^0.9.0"}
 
+[tool.poetry.scripts]
+cyber-signature = "cyber_signature.app.cli.app:app"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.3.0"
