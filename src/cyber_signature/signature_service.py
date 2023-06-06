@@ -25,7 +25,7 @@ def generate_keypair() -> tuple[Ed25519PrivateKey, Ed25519PublicKey]:
 
 
 def sign(
-    message: bytes, private_key: Optional[Ed25519PrivateKey]
+    message: bytes, private_key: Optional[Ed25519PrivateKey] = None
 ) -> tuple[bytes, Ed25519PrivateKey]:
     """Sign a message.
 
